@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kendall Kuharevicz — Social Media & Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #f5f0e8;
+    --sand-dark: #ede5d8;
+    --mocha: #b89a82;
+    --mocha-dark: #8a6e58;
+    --ink: #1e1a17;
+    --ink-mid: #4a3f35;
+    --ink-light: #7a6e65;
+    --white: #fefcf9;
+    --accent: #c4a882;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(254,252,249,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid rgba(180,154,130,0.25);
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    transition: color 0.2s;
+    font-weight: 400;
+  }
+
+  nav ul a:hover { color: var(--ink); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 6rem;
+    gap: 4rem;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 55%;
+    height: 120%;
+    background: var(--sand);
+    border-radius: 0 0 0 60% / 0 0 0 40%;
+    z-index: 0;
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mocha);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--mocha-dark);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--white);
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover { background: var(--mocha-dark); }
+
+  .btn-ghost {
+    color: var(--ink-mid);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--mocha);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--mocha-dark); }
+
+  .hero-image-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+
+  .hero-photo-frame {
+    width: 380px;
+    height: 460px;
+    border: 1.5px solid var(--mocha);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--sand-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--mocha-dark);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .photo-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--mocha);
+    display: block;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 6rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mocha);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--sand);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--ink-mid);
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .skill-category h4 {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mocha-dark);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: var(--white);
+    border: 0.5px solid var(--mocha);
+    color: var(--ink-mid);
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+
+  /* WORK */
+  #work {
+    background: var(--white);
+  }
+
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+  }
+
+  .case-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 0.5px solid var(--sand-dark);
+  }
+
+  .case-study:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .case-study.reverse { direction: rtl; }
+  .case-study.reverse > * { direction: ltr; }
+
+  .case-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .case-meta span {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    border-left: 2px solid var(--mocha);
+    padding-left: 0.6rem;
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .case-desc {
+    color: var(--ink-mid);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    font-size: 0.98rem;
+  }
+
+  .results-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .result-stat {
+    text-align: left;
+  }
+
+  .result-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--mocha-dark);
+    line-height: 1;
+    display: block;
+  }
+
+  .result-stat .label {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .case-visual {
+    background: var(--sand);
+    border-radius: 4px;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--ink-light);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 2rem;
+    border: 0.5px solid var(--mocha);
+    font-style: italic;
+  }
+
+  .case-visual-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--mocha);
+    margin-bottom: 0.5rem;
+  }
+
+  /* SERVICES */
+  #services {
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  #services .section-label { color: var(--mocha); }
+  #services .section-title { color: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+    border: 0.5px solid rgba(180,154,130,0.3);
+  }
+
+  .service-card {
+    padding: 2.5rem;
+    border-right: 0.5px solid rgba(180,154,130,0.3);
+    border-bottom: 0.5px solid rgba(180,154,130,0.3);
+    transition: background 0.3s;
+  }
+
+  .service-card:hover { background: rgba(180,154,130,0.08); }
+
+  .service-card:nth-child(3n) { border-right: none; }
+  .service-card:nth-last-child(-n+3) { border-bottom: none; }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(180,154,130,0.3);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .service-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    color: rgba(254,252,249,0.55);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* VISION */
+  #vision {
+    background: var(--sand);
+    text-align: center;
+    padding: 7rem 12rem;
+  }
+
+  #vision blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.55;
+    max-width: 780px;
+    margin: 0 auto 3rem;
+    position: relative;
+  }
+
+  #vision blockquote::before {
+    content: '\201C';
+    font-size: 6rem;
+    color: var(--mocha);
+    opacity: 0.3;
+    position: absolute;
+    top: -2.5rem;
+    left: -3rem;
+    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  #vision p {
+    color: var(--ink-mid);
+    font-weight: 300;
+    max-width: 620px;
+    margin: 0 auto 1.25rem;
+    font-size: 0.98rem;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-heading em {
+    font-style: italic;
+    color: var(--mocha-dark);
+  }
+
+  .contact-sub {
+    color: var(--ink-mid);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    font-size: 0.98rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--ink-mid);
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: color 0.2s;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid var(--sand-dark);
+  }
+
+  .contact-link:last-child { border-bottom: none; }
+
+  .contact-link:hover { color: var(--mocha-dark); }
+
+  .contact-link-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--mocha);
+    min-width: 60px;
+    font-weight: 500;
+  }
+
+  .contact-form-side {
+    background: var(--sand);
+    padding: 3rem;
+    border-radius: 4px;
+  }
+
+  .contact-form-side h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: var(--white);
+    border: 0.5px solid var(--mocha);
+    padding: 0.7rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--mocha-dark); }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { background: var(--mocha-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(254,252,249,0.45);
+    padding: 2rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+
+  footer .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(254,252,249,0.7);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.5rem; }
+    #hero { grid-template-columns: 1fr; padding: 8rem 2rem 4rem; text-align: center; }
+    #hero::before { display: none; }
+    .hero-image-wrap { order: -1; }
+    .hero-photo-frame { width: 250px; height: 300px; }
+    .hero-desc { margin: 0 auto 2rem; }
+    section { padding: 4rem 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .case-study { grid-template-columns: 1fr; gap: 2rem; }
+    .case-study.reverse { direction: ltr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { border-right: none; }
+    .service-card:nth-last-child(-n+3) { border-bottom: 0.5px solid rgba(180,154,130,0.3); }
+    .service-card:last-child { border-bottom: none; }
+    #vision { padding: 5rem 2rem; }
+    #vision blockquote::before { display: none; }
+    #contact { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="logo">Kendall Kuharevicz</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Social Media &amp; Marketing Strategist</p>
+    <h1 class="hero-name">Hi, I'm <em>Kendall</em> —<br>I turn content into results.</h1>
+    <p class="hero-desc">I build and execute social media strategies that grow audiences, drive engagement, and deliver measurable outcomes — for businesses of all sizes, across every major platform.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-ghost">Let's talk</a>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <div class="hero-photo-frame">
+  <img src="https://res.cloudinary.com/drialejvz/image/upload/q_auto/f_auto/v1777505280/Headshot_v27c4l.jpg" alt="Kendall Kuharevicz" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="fade-in">
+  <div class="about-text">
+    <span class="section-label">About me</span>
+    <h2 class="section-title">Strategy-first. Results-always.</h2>
+    <p>I'm Kendall — a Social Media &amp; Marketing Strategist who specializes in building content systems that actually move the needle. I work across platforms to develop strategies grounded in data, executed with creativity, and refined through performance.</p>
+    <p>I've created and managed content for local businesses, growing brands, and community organizations — adapting quickly to different voices, industries, and goals. My approach is organized, collaborative, and built around what works for your specific audience.</p>
+    <p>Whether you need a full content strategy, day-to-day management, or a one-time campaign, I bring the structure and the creative chops to get it done right.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h4>Strategy &amp; Planning</h4>
+      <div class="skill-tags">
+        <span class="tag">Social Media Marketing</span>
+        <span class="tag">Content Strategy</span>
+        <span class="tag">Digital Marketing</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h4>Content &amp; Creation</h4>
+      <div class="skill-tags">
+        <span class="tag">Writing &amp; Copy</span>
+        <span class="tag">Short-Form Video</span>
+        <span class="tag">Canva Graphic Design</span>
+        <span class="tag">Photography</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h4>Optimization &amp; Performance</h4>
+      <div class="skill-tags">
+        <span class="tag">Email Marketing</span>
+        <span class="tag">Analytics &amp; Reporting</span>
+        <span class="tag">SEO-Driven Content</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-header fade-in">
+    <div>
+      <span class="section-label">Selected work</span>
+      <h2 class="section-title">Projects &amp; case studies.</h2>
+    </div>
+  </div>
+
+  <div class="case-study fade-in">
+    <div class="case-content">
+      <div class="case-meta">
+        <span>Pinterest</span>
+        <span>SEO &amp; Growth Strategy</span>
+      </div>
+      <h3 class="case-title">Organic Growth Through SEO-Driven Content</h3>
+      <p class="case-desc">Built and executed a keyword-focused Pinterest strategy from the ground up — optimizing pin titles and descriptions for search discoverability, establishing a consistent visual system, and testing formats to identify what drove the most reach and saves.</p>
+      <p class="case-desc">Consistent cadence plus SEO-aligned content led to steady, compounding growth in impressions and engagement within weeks.</p>
+      <div class="results-row">
+        <div class="result-stat">
+          <span class="num">+36%</span>
+          <span class="label">Impressions</span>
+        </div>
+        <div class="result-stat">
+          <span class="num">+38%</span>
+          <span class="label">Engagement</span>
+        </div>
+        <div class="result-stat">
+          <span class="num">+43%</span>
+          <span class="label">Saves</span>
+        </div>
+      </div>
+    </div>
+<div class="case-visual" style="padding:0; overflow:hidden;">
+  <img src="https://res.cloudinary.com/drialejvz/image/upload/v1777508740/Screen_Shot_2026-01-03_at_1.55.15_PM_ns4wfb_3a6a53.png" alt="Pinterest analytics" style="width:100%; height:100%; object-fit:cover;">
+</div>
+  </div>
+
+  <div class="case-study reverse fade-in">
+    <div class="case-content">
+      <div class="case-meta">
+        <span>Brickley DeLong &amp; Lawn Doctor</span>
+        <span>Social Media for Business</span>
+      </div>
+      <h3 class="case-title">Multi-Industry Content &amp; Brand Management</h3>
+      <p class="case-desc">Managed social media content across multiple business accounts — a regional CPA firm and a franchise service brand — each with distinct audiences, tones, and goals. Developed campaigns, wrote copy, and designed graphics that matched each brand's identity while staying on deadline.</p>
+      <p class="case-desc">Delivered polished, on-brand assets in Canva under tight turnarounds, covering everything from promotional posts to community partnership campaigns.</p>
+    </div>
+  <div class="case-visual" style="padding:0; overflow:hidden;">
+  <img src="https://res.cloudinary.com/drialejvz/image/upload/v1777504951/Screen_Shot_2026-01-03_at_3.23.47_PM_s7g4st.png" alt="Social media content examples" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+</div>
+  </div>
+
+  <div class="case-study fade-in">
+    <div class="case-content">
+      <div class="case-meta">
+        <span>TikTok &amp; Short-Form Video</span>
+        <span>Content Creation</span>
+      </div>
+      <h3 class="case-title">Short-Form Video &amp; Platform Fluency</h3>
+      <p class="case-desc">Built and grew a personal TikTok presence (@kendallraekay) from scratch — developing a content cadence, testing formats, and refining what drives views and follows. Comfortable on camera and skilled at translating brand messaging into video that feels native, not forced.</p>
+      <p class="case-desc">This experience translates directly into short-form video strategy and execution for brands looking to grow on TikTok, Instagram Reels, or YouTube Shorts.</p>
+    </div>
+<div class="case-visual" style="padding:1.5rem; overflow:visible; display:flex; align-items:center; justify-content:center; height:auto; min-height:700px; width:fit-content; max-width:400px; margin:0 auto;">
+  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kendallraekay/video/6850808980474776838" data-video-id="6850808980474776838" style="max-width:325px; min-width:325px;">
+    <section>
+      <a target="_blank" title="@kendallraekay" href="https://www.tiktok.com/@kendallraekay?refer=embed">@kendallraekay</a>
+    </section>
+  </blockquote>
+  <script async src="https://www.tiktok.com/embed.js"></script>
+</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="fade-in">
+  <span class="section-label">What I offer</span>
+  <h2 class="section-title">Services built to scale.</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <p class="service-name">Content Strategy</p>
+      <p class="service-desc">Data-informed content roadmaps tailored to your platform, audience, and growth goals — built to perform, not just fill a calendar.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <p class="service-name">Social Media Management</p>
+      <p class="service-desc">Full-service account management: content creation, scheduling, community engagement, and monthly performance reporting.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <p class="service-name">Graphic Design</p>
+      <p class="service-desc">On-brand social graphics, promotional materials, and digital assets — delivered fast in Canva with a sharp eye for visual consistency.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <p class="service-name">Short-Form Video</p>
+      <p class="service-desc">Strategy, scripting, and creation of TikTok and Reels content that fits the platform — and converts viewers into followers and customers.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <p class="service-name">Email Marketing</p>
+      <p class="service-desc">Campaigns and newsletters that drive opens, clicks, and action — from copywriting and design through send and performance tracking.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <p class="service-name">Analytics &amp; Reporting</p>
+      <p class="service-desc">Clear, actionable performance reviews that tell you what's working, what isn't, and exactly where to focus next.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="fade-in">
+  <blockquote>Good marketing isn't about being everywhere — it's about showing up in the right place, with the right message, at the right time.</blockquote>
+  <p>I work with businesses that want a strategic partner, not just a content producer. My process starts with understanding your goals and audience, then building a system designed to grow and improve over time.</p>
+  <p>Every piece of content I create is backed by a reason — and tracked against a result.</p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="fade-in">
+    <span class="section-label">Get in touch</span>
+    <h2 class="contact-heading">Let's <em>work</em><br>together.</h2>
+    <p class="contact-sub">Open to full-time roles, freelance projects, and agency partnerships. If you're looking for a strategist who can hit the ground running, let's connect.</p>
+    <div class="contact-links">
+      <a href="tel:2315713893" class="contact-link">
+        <span class="contact-link-label">Phone</span>
+        <span>231-571-3893</span>
+      </a>
+      <a href="mailto:kendallkuharevicz@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span>kendallkuharevicz@gmail.com</span>
+      </a>
+      <div class="contact-link">
+        <span class="contact-link-label">Location</span>
+        <span>Muskegon, MI</span>
+      </div>
+    
+    </div>
+  </div>
+  <div class="contact-form-side fade-in">
+    <h3>Send a message</h3>
+    <form id="contact-form" action="https://formspree.io/f/maqvwdzn" method="POST">
+      <div class="form-group">
+        <label>Your name</label>
+        <input type="text" name="name" placeholder="Jane Smith" required>
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" name="email" placeholder="jane@company.com" required>
+      </div>
+      <div class="form-group">
+        <label>What are you working on?</label>
+        <textarea name="message" placeholder="Tell me a bit about your project or what you're looking for..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submit-btn">Send message</button>
+      <p id="form-status" style="margin-top: 0.75rem; font-size: 0.85rem; text-align: center; display: none;"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Kendall Kuharevicz</span>
+  <span>Social Media &amp; Marketing Strategist — Muskegon, MI</span>
+  <span>&copy; 2026</span>
+</footer>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const btn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    status.style.display = 'block';
+    if (response.ok) {
+      status.textContent = "Message sent! I'll be in touch soon.";
+      status.style.color = 'var(--mocha-dark)';
+      form.reset();
+      btn.textContent = 'Send message';
+      btn.disabled = false;
+    } else {
+      status.textContent = "Something went wrong — try emailing me directly.";
+      status.style.color = '#a32d2d';
+      btn.textContent = 'Send message';
+      btn.disabled = false;
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
